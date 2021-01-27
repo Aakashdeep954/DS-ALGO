@@ -30,6 +30,5 @@ int main()
     cin >> n;
   
     print(n);
-    cout<<endl;
-   EXT; 
+    
 }
