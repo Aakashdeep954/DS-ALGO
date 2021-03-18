@@ -28,5 +28,4 @@ int main()
    int x,n;
    cin>>x>>n;
    cout<<power(x,n)<<endl;
-   EXT; 
 }
