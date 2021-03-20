@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define fo(i,c) for(int(i) = 0; (i) < (c); (i)++)
-#define go(i,k,n) for(int i=k;k<n?i<n:i>n;k<n?i+=1:i-=1)
-#define tr(it, a) for(auto it = a.begin(); it != a.end(); it++)
+#define fo(i, c) for (int(i) = 0; (i) < (c); (i)++)
+#define go(i, k, n) for (int i = k; k < n ? i < n : i > n; k < n ? i += 1 : i -= 1)
+#define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
 #define gc getchar_unlocked
 #define ll long long int
 #define pb push_back
@@ -16,56 +16,69 @@ typedef vector<pii> vpii;
 typedef vector<vi> vvi;
 #define EXT cout << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl
 
-
-void solve(){
+void solve()
+{
     int n;
-    cin>>n;
+    cin >> n;
     int arr[n];
-    fo(i,n){
-        cin>>arr[i];
+    fo(i, n)
+    {
+        cin >> arr[i];
     }
-    sort(arr,arr+n);
+    int k;
+    cin >> k;
+    sort(arr, arr + n);
     int start_pointer = 0;
-    int end_pointer = n-1;
+    int end_pointer = n - 1;
     int count = 0;
-    while(start_pointer<end_pointer){
-        if(arr[start_pointer]+arr[end_pointer]<0){
+    while (start_pointer < end_pointer)
+    {
+        if (arr[start_pointer] + arr[end_pointer] < 6)
+        {
             start_pointer++;
         }
-        else if(arr[start_pointer]+arr[end_pointer]>0){
+        else if (arr[start_pointer] + arr[end_pointer] > 6)
+        {
             end_pointer--;
         }
-        else{
-            int l = start_pointer+1;
-            int r = end_pointer-1;
-            while(l<=r && arr[l]==arr[start_pointer]){
-                l++;
+        else
+        {
+            int l = arr[start_pointer];
+            int r = arr[end_pointer];
+            if (l == r)
+            {
+                int total_elements = end_pointer - start_pointer + 1;
+                count += ((total_elements - 1) * (total_elements) / 2);
+                break;
             }
-            while(r>=l && arr[r]==arr[end_pointer]){
-                r--;
+            int temp_start_pointer = start_pointer + 1;
+            int temp_end_pointer = end_pointer - 1;
+            while (temp_start_pointer <= temp_end_pointer && arr[temp_start_pointer] == l)
+            {
+                temp_start_pointer++;
             }
-            count+=(end_pointer-r)*(l-start_pointer);
-             if(arr[start_pointer]==0){
-                start_pointer++;
-                end_pointer = r+1;
+            while (temp_end_pointer >= temp_start_pointer && arr[temp_end_pointer] == r)
+            {
+                temp_end_pointer--;
             }
-            else{
-                 start_pointer = l;
-                end_pointer=r;
-                
-            }
+            int total_elements_from_start = temp_start_pointer - start_pointer;
+            int total_elements_from_end = end_pointer - temp_end_pointer;
+            count += (total_elements_from_start) * (total_elements_from_end);
+            start_pointer = temp_start_pointer;
+            end_pointer = temp_end_pointer;
         }
     }
-  
-    cout<<count<<endl;
+
+    cout << count << endl;
 }
 int main()
 {
-    ios::sync_with_stdio(0); 
+    ios::sync_with_stdio(0);
     cin.tie(0);
     int t;
-    cin>>t;
-    while(t--){
+    cin >> t;
+    while (t--)
+    {
         solve();
     }
 }
