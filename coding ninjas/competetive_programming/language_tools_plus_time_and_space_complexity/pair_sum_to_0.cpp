@@ -45,8 +45,15 @@ void solve(){
                 r--;
             }
             count+=(end_pointer-r)*(l-start_pointer);
-            start_pointer=l;
-            end_pointer=r;
+             if(arr[start_pointer]==0){
+                start_pointer++;
+                end_pointer = r+1;
+            }
+            else{
+                 start_pointer = l;
+                end_pointer=r;
+                
+            }
         }
     }
   
