@@ -92,6 +92,12 @@ node *take_input()
 
 node *merge_two_ll(node *head1, node *head2)
 {
+    if(head1 == NULL){
+        return head2;
+    }
+    if(head2==NULL){
+        return head1;
+    }
     node *front = NULL;
     node *tail = NULL;
     if (head1->data > head2->data)
